@@ -3,22 +3,14 @@
 
 #include <vector>
 #include <list>
+#include <set>
 
 using namespace std;
 
-class Vertice{
-public:
-	//Vertice adjacente;
-	int adjacente; // Vertice eh adjacente a qual outro
-	bool foiMarcado; // Vertice ja foi marcado no clique?
-
-	Vertice(int, bool=false);
-	~Vertice();
-};
-
 class Grafo{
-	vector<list<Vertice*>> listaAdjacencia;
-	set<vector<Vertice*>> clique;
+	vector<list<int>> listaAdjacencia;
+	vector<bool> listaAdjacencia_marcacao;
+	set<vector<int>> clique;
 	int quantidadeVertices = 0;
 
 public:
@@ -27,9 +19,11 @@ public:
 
 	void insereVertice(int, int);
 	void mostraGrafo();
-	void mostraClique();
+	void mostraCliques();
 	void inicializacao_BronKerbosch();
-	void bronKerbosch(vector<Vertice*>, vector<Vertice*>, vector<Vertice*>);
+	void bronKerbosch(vector<int>, vector<int>, vector<int>);
+	bool verifica_TodosVerticesMarcados(vector<int>);
+	void marcaVertices(vector<int>);
 	void ordena();
 };
 

@@ -1,9 +1,12 @@
-#include "graph_structure.h"
+#include "modelagem.h" // Algoritmo e modelagem utilizada
+
 #include <chrono> //Time spend
 #include <iterator>
 
 #include <cstdio> //FILE, fscanf
 #include <vector>
+
+#include <iostream>
 
 using namespace std;
 using namespace chrono; //Time spend
@@ -23,8 +26,7 @@ int main(int argc, char const* argv[]) {
 
 	// Abertura de arquivo
 	if((arquivo = fopen(argv[1], "r")) == NULL){
-		cout << "Ocorreu algum erro ao abrir o arquivo \"" << argv[1] << "\".
-		 Tente novamente." << endl;
+		cout << "Ocorreu algum erro ao abrir o arquivo \"" << argv[1] << "\". Tente novamente." << endl;
 		exit(1);
 	}
 
@@ -36,7 +38,7 @@ int main(int argc, char const* argv[]) {
 
 	//Em caso de nao conseguir ler o arquivo - conteudo obrigatorio
 	else{
-		arquivo.close();
+		fclose(arquivo);
 		exit(1);
 	}
 
@@ -54,10 +56,10 @@ int main(int argc, char const* argv[]) {
 		// Indica que verticeOrigem foi acionado
 		todosVertices[verticeOrigem-1]++;
 		// Indica que verticeDestino foi acionado
-		todosVertices[verticeDestino-1]++
+		todosVertices[verticeDestino-1]++;
 	}
 
-	arquivo.close();
+	fclose(arquivo);
 
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
@@ -65,7 +67,7 @@ int main(int argc, char const* argv[]) {
 	// 2- Retira vertices de grau 1 e ja adiciona na resposta
 
 	// 3- Calcula clique maximal possivel no grafo?
-	graph.algoritmo_BronKerbosch();
+	grafo.inicializacao_BronKerbosch();
 
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
@@ -73,7 +75,7 @@ int main(int argc, char const* argv[]) {
 
 	cout << "\nExecution Time " << time_span.count() << " ms " << endl;
 
-	graph.numeroCliques();	
+	grafo.mostraCliques();	
 
 	return 0;
 }
