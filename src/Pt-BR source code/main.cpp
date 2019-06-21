@@ -33,7 +33,7 @@ int main(int argc, char const* argv[]) {
 	// Verifica quantidade de vertices e arestas do grafo
 	else if(fscanf(arquivo, "%c %[A-z a-z] %d %d '\n'", 
 		                    &caractere, lixeira, &quantidadeVertices, &quantidadeArestas)) 
-		cout << "V = " << quantidadeVertices 
+		cout << " V = " << quantidadeVertices 
 	      << " - A = " << quantidadeArestas << "." << endl;
 
 	//Em caso de nao conseguir ler o arquivo - conteudo obrigatorio
@@ -61,19 +61,24 @@ int main(int argc, char const* argv[]) {
 
 	fclose(arquivo);
 
+	grafo.mostraGrafo();
+
+	int maiorCliquePossivel = grafo.descobreMaiorCliquePossivel();
+	cout << " Maior clique possivel: " << maiorCliquePossivel << endl;
+
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
 	// 1- Retira vertices de grau 0
 	// 2- Retira vertices de grau 1 e ja adiciona na resposta
 
 	// 3- Calcula clique maximal possivel no grafo?
-	grafo.inicializacao_BronKerbosch();
+	grafo.inicializacao_BronKerbosch(maiorCliquePossivel);
 
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
 	duration<double> time_span = duration_cast<duration<double, std::milli>>(t2 - t1);
 
-	cout << "\nExecution Time " << time_span.count() << " ms " << endl;
+	cout << "\n Execution Time " << time_span.count() << " ms " << endl;
 
 	grafo.mostraCliques();	
 

@@ -20,11 +20,12 @@ public:
 	void insereVertice(int, int);
 	void mostraGrafo();
 	void mostraCliques();
-	void inicializacao_BronKerbosch();
-	void bronKerbosch(vector<int>, vector<int>, vector<int>);
+	void inicializacao_BronKerbosch(int);
+	void bronKerbosch(vector<int>, vector<int>, vector<int>, int);
 	bool verifica_TodosVerticesMarcados(vector<int>);
 	void marcaVertices(vector<int>);
-	void ordena();
+	int descobreMaiorCliquePossivel();
+	int verificaMaiorGrafoCompleto(int, vector<int>);
 };
 
 #endif
